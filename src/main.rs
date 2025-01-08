@@ -18,15 +18,21 @@ fn main() {
     );
     let _x = (x.1,);
 
-    let mut y = [0.0; 100_000];
+    let mut y = Vec::new();
     let x: [f32; 3] = [0.05, 0.10, 1.15];
     #[allow(clippy::manual_memcpy)]
     for i in 0..3 {
-        y[i] = x[i];
+        y.push(x[i]);
     }
     //y[100_001] = 1.0;
 
     // println!("Hello, world! {:?}", x[0]);
     let s = print_and_sum(&mut y);
     println!("got {}", s);
+
+    println!("{}", *&y[0]);
+    let _ = y.pop().unwrap();
+    for _ in 1..3 {
+        println!("{}", y.pop().unwrap());
+    }
 }
